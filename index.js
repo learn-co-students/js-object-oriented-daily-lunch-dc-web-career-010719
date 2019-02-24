@@ -24,9 +24,9 @@ class Neighborhood {
     meals() {
 
         let allMeals = this.deliveries().map(delivery => delivery.meal())
-        allMeals = this.flatten(allMeals)
-        allMeals = this.uniq(allMeals)
-        return allMeals
+        let mergeMeals = this.flatten(allMeals)
+        let uniqMeals = this.uniq(mergeMeals)
+        return [...uniqMeals]
     }
 
     flatten(a) {
