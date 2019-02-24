@@ -22,9 +22,38 @@ class Neighborhood {
     }
 
     meals() {
-        const allMeals = this.deliveries().map(delivery => delivery.meal())
-        const merged = [].concat.apply([], allMeals);
-        return [...new Set(merged)];
+
+        let allMeals = this.deliveries().map(delivery => delivery.meal())
+        allMeals = this.flatten(allMeals)
+        allMeals = this.uniq(allMeals)
+        return allMeals
+    }
+
+    flatten(a) {
+        var queue = a.slice();
+        var result = [];
+        while(queue.length) {
+            let curr = queue.pop();
+            if(Array.isArray(curr)) {
+                queue.push(...curr);
+            }
+            else result.push(curr);
+        }
+        return result;
+    }
+    
+    uniq(arr) {
+      let ret = []
+    
+      arr.forEach(index => {
+        if(ret.includes(index)) {
+          console.log('skip index')
+        } else {
+          ret.push(index)
+        }
+      })
+    
+      return ret
     }
 }
 
